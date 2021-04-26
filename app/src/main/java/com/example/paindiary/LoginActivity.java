@@ -22,8 +22,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(this);
-        useridEt = (EditText) findViewById(R.id.userId);
-        passEt = (EditText) findViewById(R.id.pass);
+        useridEt = (EditText) findViewById(R.id.login_et_email);
+        passEt = (EditText) findViewById(R.id.login_et_password);
         promptText = (TextView) findViewById(R.id.promptText);
 
     }
@@ -45,7 +45,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         if (userid.equals("admin") && pass.equals("admin")) {
             Toast.makeText(this, R.string.loginSuccess, Toast.LENGTH_LONG).show();
-            Intent intent_hello = new Intent(this, MainActivity.class); // todo create a login class
+            Intent intent_hello = new Intent(this, HomeActivity.class); // todo create a post-login class
             startActivity(intent_hello);
             LoginActivity.this.finish();
         } else {

@@ -12,9 +12,9 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
-    <string name="default_message">"hello xvshu!"</string>
+    <string name="default_message">"hello!"</string>
     <string name="button_send">"say hello"</string>
-
+    <string name="wait">"wait!"</string>
     <string name="interact_message">You just clicked on the Button!</string>
 
     <string name="userIdError">You userid is error!</string>
