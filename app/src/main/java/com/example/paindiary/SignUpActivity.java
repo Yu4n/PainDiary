@@ -39,14 +39,14 @@ public class SignUpActivity extends AppCompatActivity {
                 TextView psw_view = (TextView) findViewById(R.id.signup_et_password);
                 String email = email_view.getText().toString();
                 String password = psw_view.getText().toString();
-                //final AlertDialog dlg= UIUtils.createDialog(getString(R.string.wait),getString(R.string.wait), this);
+                final AlertDialog dlg= UIUtils.createDialog(getString(R.string.wait),getString(R.string.wait), SignUpActivity.this);
 
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if(dlg!=null){
-//                            dlg.dismiss();
-//                        }
+                        if(dlg!=null){
+                            dlg.dismiss();
+                        }
                         if(task.isSuccessful()){
                             Toast.makeText(SignUpActivity.this,getString(R.string.loginSuccess),Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignUpActivity.this,HomeActivity.class));
