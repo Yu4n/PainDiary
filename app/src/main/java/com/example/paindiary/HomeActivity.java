@@ -2,9 +2,13 @@ package com.example.paindiary;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -27,9 +31,13 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Fragment fragment = new PainDataEntryFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.content_frame, fragment);
+        ft.commit();
         weatherData = findViewById(R.id.weather_details);
-
 
         findViewById(R.id.getWeather).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
                     String stringBuilder = "Country: " +
                             weatherResponse.sys.country +
                             "\n" +
-                            "Temperature: " +
+                            "Temp: " +
                             (weatherResponse.main.temp - 273) +
                             "\n" +
                             "Humidity: " +

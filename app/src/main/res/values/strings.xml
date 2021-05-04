@@ -22,4 +22,7 @@
     <string name="loginSuccess">Login success </string>
     <string name="loginError">Login error </string>
 
+    <string name="nav_open_drawer">Open navigation drawer</string>
+    <string name="nav_close_drawer">Close navigation drawer</string>
+
 </resources>
