@@ -1,13 +1,70 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.paindiary.PainDataEntryFragment">
+    tools:context="com.example.paindiary.ui.painData.PainDataEntryFragment">
 
     <TextView
-        android:id="@+id/Pain_Data_Entry"
+        android:id="@+id/nav_pain_data_entry"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Pain Data Entry" />
-</LinearLayout>
+        android:text="" />
+
+    <Spinner
+        android:id="@+id/PDE_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:entries="@array/Locations"
+        android:spinnerMode="dropdown"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+    <Spinner
+        android:id="@+id/PDE_spinner_pain"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="170dp"
+        android:entries="@array/tens"
+        android:spinnerMode="dropdown"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+    <RatingBar
+        android:id="@+id/ratingBar_PDE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:rating = "3"/>
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="420dp"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="420dp"
+        android:text="Edit" />
+
+    <EditText
+        android:id="@+id/steps_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="10000" />
+
+</RelativeLayout>

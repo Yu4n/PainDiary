@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.paindiary.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_pain_data_entry"
+        android:name="com.example.paindiary.ui.painData.PainDataEntryFragment"
+        android:label="@string/menu_pain_data_entry"
+        tools:layout="@layout/fragment_pain_data_entry" />
+
+    <fragment
+        android:id="@+id/nav_daily_record"
+        android:name="com.example.paindiary.ui.DailyRecord.DailyRecordFragment"
+        android:label="@string/menu_daily_record"
+        tools:layout="@layout/fragment_daily_record" />
+    <fragment
+        android:id="@+id/nav_reports"
+        android:name="com.example.paindiary.ui.reports.ReportsFragment"
+        android:label="@string/menu_reports"
+        tools:layout="@layout/fragment_reports" />
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.example.paindiary.ui.map.MapFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_map" />
+</navigation>

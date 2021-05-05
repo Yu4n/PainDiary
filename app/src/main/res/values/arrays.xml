@@ -1,0 +1,25 @@
+<resources>
+    <string-array name="Locations">
+        <item>back</item>
+        <item>neck</item>
+        <item>head</item>
+        <item>knee</item>
+        <item>hips</item>
+        <item>abdomen</item>
+        <item>elbows</item>
+        <item>shoulders</item>
+    </string-array>
+    <string-array name="tens">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+</resources>

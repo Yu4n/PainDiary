@@ -4,8 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".DailyRecordFragment">
+
     <TextView
+        android:id="@+id/nav_daily_record"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Daily Record" />
+    <EditText
+        android:id="@+id/daily_record_editText"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+    </EditText>
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.paindiary;
+package com.example.paindiary.ui.home;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -28,6 +28,10 @@ public class WeatherResponse {
     public String name;
     @SerializedName("cod")
     public float cod;
+    @SerializedName("tem")
+    public float tem;
+    public String humidity;
+    public String pressure;
 }
 
 class Weather {
