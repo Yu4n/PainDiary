@@ -51,14 +51,12 @@ public class HomeFragment extends Fragment {
                 .build();
         WeatherService service = retrofit.create(WeatherService.class);
         Call<WeatherResponse> call = service.getCurrentWeatherData(cityId, appsecret);
-        Log.d("aaa","aaa");
         call.enqueue(new Callback<WeatherResponse>() {
             @Override
             public void onResponse(@NonNull Call<WeatherResponse> call, @NonNull Response<WeatherResponse> response) {
                 if (response.code() == 200) {
                     WeatherResponse weatherResponse = response.body();
-                    //assert weatherResponse != null;
-                    Log.d("aaa","success");
+                    assert weatherResponse != null;
                     String weatherData = "City: " +
                             weatherResponse.name +
                             "\n" +
@@ -75,7 +73,6 @@ public class HomeFragment extends Fragment {
             }
             @Override
             public void onFailure(@NonNull Call<WeatherResponse> call, @NonNull Throwable t) {
-                Log.d("aaa","fail");
                 textView.setText(wea);
             }
         });

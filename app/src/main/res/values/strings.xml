@@ -38,4 +38,6 @@
     <string name="menu_reports">Reports</string>
     <string name="menu_map">Map</string>
 
+    <string name="mapbox_access_token">pk.eyJ1IjoibWFwYm94MTIzNWZkZCIsImEiOiJja29ja2I1dGIwOGt6Mm9xYWhoZGY4NGp5In0.54v_3Kx9flE_tHVk85ECCQ</string>
+
 </resources>

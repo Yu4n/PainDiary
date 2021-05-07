@@ -36,12 +36,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     }
 
-
     @Override
     public void onClick(View v) {
         mAuth = FirebaseAuth.getInstance();
         TextView email_view = (TextView) findViewById(R.id.login_et_email);
         TextView psw_view = (TextView) findViewById(R.id.login_et_password);
+        email_view.setText("test@gmail.com");
+        psw_view.setText("12345678");
         String login_email = email_view.getText().toString();
         String login_password = psw_view.getText().toString();
         mAuth.signInWithEmailAndPassword(login_email,login_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

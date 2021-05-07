@@ -1,4 +1,4 @@
-package com.example.paindiary;
+package com.example.paindiary.db;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;

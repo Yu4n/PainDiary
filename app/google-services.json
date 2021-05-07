@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "978978007312",
+    "project_id": "paindiary-312905",
+    "storage_bucket": "paindiary-312905.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978978007312:android:40e4eff9044e614f1b5d95",
+        "android_client_info": {
+          "package_name": "com.example.paindiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978978007312-e091mib7tj3up3pba7khc59ecuudeite.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7f-bJ6E8UEVf3sTJuAeL2qQLDKu0uol4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978978007312-e091mib7tj3up3pba7khc59ecuudeite.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,18 +1,25 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".DailyRecordFragment">
+    tools:context=".ui.DailyRecord.DailyRecordFragment">
 
     <TextView
         android:id="@+id/nav_daily_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_daily_record"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Daily Record" />
-    <EditText
-        android:id="@+id/daily_record_editText"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-    </EditText>
-</LinearLayout>
+        android:scrollbars="vertical"
+        app:layout_constraintStart_toStartOf="@+id/nav_daily_record"
+        app:layout_constraintTop_toTopOf="@+id/nav_daily_record" />
+</androidx.constraintlayout.widget.ConstraintLayout>
