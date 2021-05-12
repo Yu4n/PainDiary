@@ -24,6 +24,7 @@ import androidx.room.Room;
 import com.example.paindiary.db.AppDatabase;
 import com.example.paindiary.R;
 import com.example.paindiary.db.User;
+import com.example.paindiary.ui.home.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
@@ -45,6 +46,8 @@ public class PainDataEntryFragment extends Fragment {
         Button saveBtn = (Button) root.findViewById(R.id.save_button);
         Spinner spinner = (Spinner) root.findViewById(R.id.PDE_spinner);
         Spinner pain_level_spinner = (Spinner) root.findViewById(R.id.PDE_spinner_pain);
+        Button editBtn = (Button) root.findViewById(R.id.edit_button);
+        EditText editSteps = root.findViewById(R.id.steps_edit);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             //当item被选择后调用此方法
@@ -114,27 +117,47 @@ public class PainDataEntryFragment extends Fragment {
                 String painLocation = spinner.getSelectedItem().toString();
                 String painLevel = pain_level_spinner.getSelectedItem().toString();
                 int mood = (int)Math.ceil(mRatingBar.getRating());
-                EditText editSteps = root.findViewById(R.id.steps_edit);
-                int steps = Integer.parseInt(editSteps.getText().toString());
+                String[] stepsArray = editSteps.getText().toString().split("\\s*,\\s*");
                 User user = new User();
                 user.email = email;
                 user.painLevel = painLevel;
                 user.painLocation = painLocation;
                 user.mood = mood;
-                user.steps = steps;
+                user.steps = Integer.parseInt(stepsArray[0]);
+                user.today_steps = Integer.parseInt(stepsArray[1]);
+                user.temp = HomeFragment.temp - (float)273.15;
+                user.humidity = HomeFragment.humidity;
+                user.pressure = HomeFragment.pressure;
                 Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = new Date();
                 user.date = format.format(date);
                 Log.d("PainDataEntryFragment","user created");
                 //Toast.makeText(getActivity().getApplicationContext(),painLevel,Toast.LENGTH_SHORT).show();
                 AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(),
                         AppDatabase.class,"user").allowMainThreadQueries().build();
-                db.userDao().insert(user);
+                //db.userDao().insert(user);
+                if (db.userDao().getDate(user.email).equals(user.date)){
+                    db.userDao().updateUsers(user.email, painLocation, painLevel, mood, user.date, user.steps, user.today_steps);
+                    saveBtn.setEnabled(false);
+//                    spinner.setEnabled(false);
+//                    pain_level_spinner.setEnabled(false);
+//                    editSteps.setEnabled(false);
+//                    mRatingBar.setEnabled(false);
+                    Toast.makeText(getActivity().getApplicationContext(),"save success!",Toast.LENGTH_SHORT).show();
+                } else {
+                    db.userDao().insert(user);
+                    saveBtn.setEnabled(false);
+                    Toast.makeText(getActivity().getApplicationContext(),"save success!",Toast.LENGTH_SHORT).show();
+                }
                 Log.d("PainDataEntryFragment", db.userDao().getDate(user.email));
-//                if (db.userDao().getDate(user.email).substring(0, 9).equals(user.date.substring(0, 9))){
-//                    Toast.makeText(getActivity().getApplicationContext(),"Please Edit!",Toast.LENGTH_SHORT).show();
-//                } else {
+                //Log.d("PainDataEntryFragment", String.valueOf(user.temp) + ' ' + user.humidity + ' ' + user.pressure);
+//                saveBtn.setEnabled(false);
+//                spinner.setEnabled(false);
+//                pain_level_spinner.setEnabled(false);
+//                editSteps.setEnabled(false);
+//                mRatingBar.setEnabled(false);
+                //else {
 //                    db.userDao().insert(user);
 //                    //Toast.makeText(getActivity().getApplicationContext(),user.uid,Toast.LENGTH_SHORT).show();
 //                    Log.d("PainDataEntryFragment", user.date);
@@ -142,6 +165,16 @@ public class PainDataEntryFragment extends Fragment {
             }
         });
 
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveBtn.setEnabled(true);
+                spinner.setEnabled(true);
+                pain_level_spinner.setEnabled(true);
+                editSteps.setEnabled(true);
+                mRatingBar.setEnabled(true);
+            }
+        });
         PainDataEntryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

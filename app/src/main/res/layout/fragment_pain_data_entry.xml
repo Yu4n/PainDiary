@@ -64,7 +64,18 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="350dp"
         android:ems="10"
-        android:inputType="number"
-        android:text="10000" />
+        android:inputType="text"
+        android:hint="Target, Today's steps"/>
+
+    <TimePicker
+        android:id="@+id/timepicker"
+        android:layout_width="wrap_content"
+        android:layout_height="229dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="0dp"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:timePickerMode="spinner" />
 
 </RelativeLayout>

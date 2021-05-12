@@ -13,6 +13,8 @@ public class User {
 
     public int steps;
 
+    public int today_steps;
+
     public String painLocation;
 
     public String painLevel;

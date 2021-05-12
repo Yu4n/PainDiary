@@ -31,13 +31,14 @@ android {
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 dependencies {
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     implementation "androidx.recyclerview:recyclerview:1.2.0"
     // For control over item selection of both touch and mouse driven selection
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
 
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.11.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:4.8.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.0.0@aar'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.6.1'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0'
 
     def room_version = "2.3.0"
 

@@ -32,8 +32,9 @@ public class HomeFragment extends Fragment {
     public static String BaseUrl = "http://api.openweathermap.org/";
     public static String cityId = "1886760";
     public static String appsecret = "d7c33b70b706590fe2eb5d2a1274a71b";
-
-
+    public static float temp;
+    public static float humidity;
+    public static float pressure;
 
     private HomeViewModel HomeViewModel;
 
@@ -61,13 +62,16 @@ public class HomeFragment extends Fragment {
                             weatherResponse.name +
                             "\n" +
                             "Temp: " +
-                            (weatherResponse.main.temp - 273) +
+                            (weatherResponse.main.temp - 273.15) +
                             "\n" +
                             "Humidity: " +
                             weatherResponse.main.humidity +
                             "\n" +
                             "Pressure: " +
                             weatherResponse.main.pressure;
+                    temp = weatherResponse.main.temp;
+                    humidity = weatherResponse.main.humidity;
+                    pressure =  weatherResponse.main.pressure;
                     textView.setText(weatherData);
                 }
             }
@@ -77,7 +81,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        //textView.setText(HomeViewModel.getCurrentData());
         HomeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

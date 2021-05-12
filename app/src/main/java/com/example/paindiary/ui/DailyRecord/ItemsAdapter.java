@@ -18,13 +18,14 @@ import com.example.paindiary.db.User;
 import java.util.List;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
-//    AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(),
+    //    AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(),
 //            AppDatabase.class,"user").allowMainThreadQueries().build();
     private List<User> users;
     private Context context;
-    public ItemsAdapter (Context context,List<User> users){
+
+    public ItemsAdapter(Context context, List<User> users) {
         this.users = users;
-        this.context=context;
+        this.context = context;
     }
 
     @NonNull
@@ -40,7 +41,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //TextView tv = holder.textView;
         //TextView textView = holder.textView;
-        holder.textView.setText(users.get(position).email + users.get(position).mood);
+        holder.textView.setText(users.get(position).email + ", "  + users.get(position).steps + ", " + users.get(position).today_steps + ", " +
+                                users.get(position).painLocation + ", " + users.get(position).painLevel + ", " +
+                                users.get(position).temp + ", " + users.get(position).humidity + "\n" +
+                                users.get(position).pressure + ", " + users.get(position).date);
     }
 
     @Override
@@ -53,9 +57,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
+
         public ViewHolder(@NonNull View tv) {
             super(tv);
-            textView=(TextView)tv.findViewById(R.id.item_user_adapter);
+            textView = (TextView) tv.findViewById(R.id.item_user_adapter);
         }
     }
 
