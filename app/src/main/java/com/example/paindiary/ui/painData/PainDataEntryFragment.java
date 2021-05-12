@@ -1,17 +1,23 @@
 package com.example.paindiary.ui.painData;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,9 +37,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static android.content.Context.ALARM_SERVICE;
+import static androidx.core.content.ContextCompat.getSystemService;
+
 public class PainDataEntryFragment extends Fragment {
     private FirebaseAuth mAuth;
     private PainDataEntryViewModel PainDataEntryViewModel;
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,7 +58,31 @@ public class PainDataEntryFragment extends Fragment {
         Spinner spinner = (Spinner) root.findViewById(R.id.PDE_spinner);
         Spinner pain_level_spinner = (Spinner) root.findViewById(R.id.PDE_spinner_pain);
         Button editBtn = (Button) root.findViewById(R.id.edit_button);
+        Button alarmBtn = (Button) root.findViewById(R.id.alarm_button);
         EditText editSteps = root.findViewById(R.id.steps_edit);
+        TimePicker timePicker = root.findViewById(R.id.timepicker);
+        timePicker.setIs24HourView(true);
+//        AlarmManager alm=(AlarmManager)getSystemService(ALARM_SERVICE);
+//        alm.set(AlarmManager.RTC_WAKEUP, millis,mAlarmSender);
+//        Intent intent=new Intent(this,AvisoReceiver.class);
+//        PendingIntent mAlarmSender=PendingIntent.getBroadcast(CalendarView.this,23454546, intent,0);
+        alarmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, timePicker.getHour());
+                calendar.set(Calendar.HOUR_OF_DAY, timePicker.getMinute());
+                Context context = getActivity().getApplicationContext();
+                alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+                Intent intent = new Intent(context, AlarmReceiver.class);
+                alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+                //alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 5 * 1000, alarmIntent);
+                Log.d("AlarmManagerPDE", "clock");
+            }
+        });
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             //当item被选择后调用此方法
@@ -139,17 +174,15 @@ public class PainDataEntryFragment extends Fragment {
                 //db.userDao().insert(user);
                 if (db.userDao().getDate(user.email).equals(user.date)){
                     db.userDao().updateUsers(user.email, painLocation, painLevel, mood, user.date, user.steps, user.today_steps);
-                    saveBtn.setEnabled(false);
-//                    spinner.setEnabled(false);
+                    //                    spinner.setEnabled(false);
 //                    pain_level_spinner.setEnabled(false);
 //                    editSteps.setEnabled(false);
 //                    mRatingBar.setEnabled(false);
-                    Toast.makeText(getActivity().getApplicationContext(),"save success!",Toast.LENGTH_SHORT).show();
                 } else {
                     db.userDao().insert(user);
-                    saveBtn.setEnabled(false);
-                    Toast.makeText(getActivity().getApplicationContext(),"save success!",Toast.LENGTH_SHORT).show();
                 }
+                saveBtn.setEnabled(false);
+                Toast.makeText(getActivity().getApplicationContext(),"save success!",Toast.LENGTH_SHORT).show();
                 Log.d("PainDataEntryFragment", db.userDao().getDate(user.email));
                 //Log.d("PainDataEntryFragment", String.valueOf(user.temp) + ' ' + user.humidity + ' ' + user.pressure);
 //                saveBtn.setEnabled(false);

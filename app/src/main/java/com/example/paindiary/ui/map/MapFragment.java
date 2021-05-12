@@ -15,9 +15,12 @@ import com.example.paindiary.R;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.paindiary.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -105,13 +108,23 @@ public class MapFragment extends Fragment {
                                 .zoom(13)
                                 .build();
                         mapboxMap.setCameraPosition(position);
+                        mapboxMap.addMarker(new MarkerOptions().position(latLng));
+                    }
+                });
+                mapboxMap.addMarker(new MarkerOptions().position(latLng));
 
+                mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
+                    @Override
+                    public boolean onMapClick(@NonNull LatLng point) {
+                        mapboxMap.removeAnnotations();
+                        //Toast.makeText(getContext(), String.format("User clicked at: %s", point.toString()), Toast.LENGTH_LONG).show();
+                        mapboxMap.addMarker(new MarkerOptions().position(point));
+                        return true;
                     }
                 });
 
             }
         });
-
 
         Button btn_map_search = root.findViewById(R.id.btn_map_search);
         EditText edit_map_search = root.findViewById(R.id.edit_map_search);
@@ -164,6 +177,7 @@ public class MapFragment extends Fragment {
                                         .zoom(13)
                                         .build();
                                 mapboxMap.setCameraPosition(position);
+                                mapboxMap.addMarker(new MarkerOptions().position(latLng));
 
                             }
                         });
@@ -174,6 +188,10 @@ public class MapFragment extends Fragment {
 
             }
         });
+
+
+
+
 
 
         return root;
